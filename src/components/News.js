@@ -16,13 +16,15 @@ export default class News extends Component {
     pageSize:PropTypes.number,
     category:PropTypes.string
   }
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       articles: [],
       loading: false,
       page: 1,
     };
+    document.title  = this.props.category.charAt(0).toUpperCase() + this.props.category.slice(1)
+    //document.title = this.props.category;
   }
 
   async updateNews(){
@@ -57,7 +59,7 @@ export default class News extends Component {
   render() {
     return (
       <div className="container my-3">
-        <h1 className="text-center">News - Top Headlines</h1>
+        <h1 className="text-center">News - Top Headlines {this.props.category.charAt(0).toUpperCase() + this.props.category.slice(1)} Headlines</h1>
         { this.state.loading && <Spinner></Spinner>}
         <div className="row">
           {!this.state.loading && this.state.articles.map((element) => {
